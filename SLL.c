@@ -9,7 +9,7 @@ void Delete();
 void Display();
 void ReverseDisplay();
 void ReverseIteration();
-void MaxMin();
+void MaxMin(int,int);
 struct  Node 
 {
   int data;

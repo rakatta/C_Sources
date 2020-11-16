@@ -1,12 +1,15 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<LinuxConio.h>
+#include"LinuxConio.h"
 #include<malloc.h>
-
+#include<string.h>
 void Insert();
 void Delete();
-void Search();
+void Display();
+void ReverseDisplay();
+void ReverseIteration();
+void MaxMin(int,int);
 struct  Node 
 {
   int data;
@@ -15,6 +18,7 @@ struct  Node
 };
 
 struct Node *head =NULL;
+struct Node *rev;
 int main (void)
 {
   
@@ -22,7 +26,7 @@ int main (void)
   
   while(1)
   {
-   printf("\nenter corresponding values for operation \n 1.Insert \n 2.Delete \n 3.Search\n ");
+   printf("\nenter corresponding values for operation \n 1.Insert \n 2.Delete \n 3.Search\n 4.ReverseDisplay\n ");
    printf("\n enter your choice:: ");
    scanf("%d",&choice);
     switch(choice)
@@ -31,7 +35,9 @@ int main (void)
     break;
     case 2: Delete();
     break;
-    case 3 : Search();
+    case 3 : Display();
+    break;
+    case 4: ReverseDisplay();
     break;
     default: 
     {
@@ -69,11 +75,12 @@ int main (void)
    }
  }
  
- void Search()
+ void Display()
  {
    struct Node *temp1;
-   int count=0;
+   int max=0,min=0;
    temp1=head;
+   max=temp1->data;
    if(head==NULL)
    printf("No element is entered");
    else
@@ -85,8 +92,35 @@ int main (void)
     while(temp1!=NULL)
     {
      printf("%d\t",temp1->data);
+     
+     if ( max<temp1->data)
+     max=temp1->data; 
+     temp1=temp1->next; 
+    }
+    temp1=head;
+    min=temp1->data;
+    while(temp1!=NULL)
+    {
+     
+     if ( min>temp1->data)
+     min=temp1->data;  
      temp1=temp1->next;
-     count++;   
+    }
+    
+    int flag;
+    puts("\nenter  1 for maximum and 0 for minimum value in the lisked list");
+    scanf("%d", &flag);
+    switch(flag){
+    
+    case 1: MaxMin(max,flag);
+    break;
+    case 0: MaxMin(min,flag);
+    break;
+    default:
+    {
+      printf("\nEnter the correct choice to find the value");
+    }
+    
     }
    
    }
@@ -121,6 +155,7 @@ void Delete()
        head=temp1->next;
        head->prev=NULL;
        free(temp1);
+       break;
      }
      else
      if (temp1->data == del)
@@ -130,6 +165,7 @@ void Delete()
        temp2->next = temp3->next;
        temp1->prev =NULL;
        free(temp1);
+       break;
      }
      else
      {
@@ -138,9 +174,45 @@ void Delete()
       count++; 
      } 
     }
+     if (temp1 == NULL ){
+      puts("item not found"); 
+      }
    }
      
 }
+
+void RD(struct Node*);
+void ReverseDisplay() {
+
+rev =head;
+if (head == NULL)
+printf(" No element is in the linked list");
+
+else {
+puts("reverse elements in the linked list in recursion\n");
+   RD(rev);
+}
+}
+void RD(struct Node* r) {
+
+if (r == NULL){
+return ;
+}
+else {
+  RD(r->next);
+  printf("%d\t" , r->data);
+}
+}
+
+void MaxMin(int value,int swap){
+
+if (swap ==1 )
+printf("Maximum value :: %d " , value);
+else
+printf(" Minimum value :: %d" , value);
+}
+
+
 
 
 

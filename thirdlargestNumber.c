@@ -1,6 +1,5 @@
 
 #include<stdio.h>
-#include"LinuxConio.h"
 
 // to find the third largest number in an unsorted array in O(n) time complexity
 // This can be done using hash table

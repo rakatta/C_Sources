@@ -100,14 +100,13 @@ void Display() {
    
   else {
    while ( local->next != NULL ) {
-      printf("%d\t",local->data);
-      local = local->next;
       if (local->next == head ) {
-      //count+=1;
-      break; 
+       printf("%d\t",local->data);
+       break; 
      }
+     printf("%d\t",local->data);
+      local = local->next;
    }
-   printf("%d\t",local->data);
    printf(" \n number of elements in a circular list :: %d", count);
   }
 }

@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
-// Hash table open addressing logic 
+// Hash table Linear Probing logic 
 int main(void) {
 const int countSize = 10;
-int arr[10] = { 3,5,1,2,8,9,7,4,8};
+int arr[10] = { 103,154,111,112,188,119,153,187,111,187};
 int counter =0;
 for ( int i=0;i<countSize;i++)
 printf("%d\t",arr[i]);
@@ -17,11 +17,11 @@ for ( int i=0;i<countSize;i++) {
   key = arr[i]%10;
  d: if ( hashTable[key] == 0) {
   hashTable[key] =arr[i];
-  printf("%d\t",hashTable[key]);
+  //printf("%d\t",hashTable[key]);
   }
   
   else
-  if ((hashTable[key] == arr[i]) || (hashTable[key]!=0) ) {
+  if ((hashTable[key] == arr[i])  ) {
   counter+=1;
   if (counter ==1 )
   printf("\nThe first value repeated is :: %d\n", arr[i]);
@@ -38,6 +38,8 @@ for ( int i=0;i<countSize;i++) {
   continue;
 }
 
+if ( counter == 0 )
+printf ("\n No number is repeated");
 printf("\n");
 for ( int i=0;i<countSize;i++)
 printf("%d\t %d\n", i,hashTable[i]);

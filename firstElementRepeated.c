@@ -35,7 +35,10 @@ for ( int i=0;i<countSize;i++) {
    goto d;
  }
   else
-  continue;
+  {
+    key = key +1;
+    goto d;
+  } 
 }
 
 if ( counter == 0 )

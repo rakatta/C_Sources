@@ -16,7 +16,7 @@ int key = 0;
 for ( int i=0;i<countSize;i++) {
   key = arr[i]%10;
  d: if ( hashTable[key] == 0) {
-  hashTable[key] =arr[i];
+    hashTable[key] =arr[i];
   //printf("%d\t",hashTable[key]);
   }
   
@@ -42,10 +42,10 @@ for ( int i=0;i<countSize;i++) {
 }
 
 if ( counter == 0 )
-printf ("\n No number is repeated");
-printf("\n");
-for ( int i=0;i<countSize;i++)
-printf("%d\t %d\n", i,hashTable[i]);
-printf("\n");
-return 0;
+ printf ("\n No number is repeated");
+ printf("\n");
+ for ( int i=0;i<countSize;i++)
+  printf("%d\t %d\n", i,hashTable[i]);
+   printf("\n");
+ return 0;
 }

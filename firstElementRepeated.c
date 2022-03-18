@@ -3,6 +3,7 @@
 #include<string.h>
 
 // Hash table Linear Probing logic 
+// To Find the first repetetive number in the array in O(n)
 int main(void) {
 const int countSize = 10;
 int arr[10] = { 103,154,111,112,188,119,153,187,111,187};

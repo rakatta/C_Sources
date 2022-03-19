@@ -27,8 +27,8 @@ static void init()
   for ( int i=0;i<SIZE;i++)
    hashT[i] = (struct Node *) malloc( sizeof(struct Node)) ;
    
-   for ( int i=0;i<SIZE;i++)
- hashT[i]->next = NULL;
+  for ( int i=0;i<SIZE;i++)
+   hashT[i]->next = NULL;
 
 }
 

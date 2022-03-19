@@ -47,20 +47,20 @@ printf("\nenter corresponding values for Hash table operation \n 1.Insert \n 2.D
    {
     case 1: str = (char *)malloc ( 20 * sizeof (char ));
             printf(" \n Enter any String \n");
-            scanf ("%s", str);
+            fgets(str,20,stdin);
             key = hashFunction(str);
             hashInsert(str,key);
             
      break;
     case 2: str = (char *)malloc ( 20 * sizeof (char ));
             printf(" \n Enter any String \n");
-            scanf ("%s", str);
+            fgets(str,20,stdin);
             key = hashFunction(str);
             hashDelete(str,key);
     break;
     case 3 : printf(" \n Enter a string to search \n");
              str = (char *) malloc ( 20*sizeof(char ));     
-             scanf("%s", str);
+             fgets(str,20,stdin);
              key=hashFunction(str);
              flag=0;
              hashDisplay(key,str,flag);

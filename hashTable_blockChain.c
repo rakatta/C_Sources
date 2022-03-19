@@ -69,10 +69,7 @@ printf("\nenter corresponding values for Hash table operation \n 1.Insert \n 2.D
     case 4 : flag=1;
              d : printf(" \n Enter a key to display hash Table values from 0 to 9 : \n");
              scanf("%d",&key);
-             if ( (key >=0) && (key <=9) )
-              hashDisplay(key, str,flag);
-             else
-             goto d;
+             ( (key >=0) && (key <=9) ) ?   hashDisplay(key, str,flag) : ({goto d;}) ;
     break;         
     default: 
      {

@@ -4,7 +4,7 @@
 #include<string.h>
 
 // Hash Table Block Chain Using Single Linked List
-// This program takes the entered string and stores in a hash Table at a particular index on the hashCode Algorithm, if collison happens with another string at an index then it forms a singlelinked list and stores the values
+// This program takes the key-value pair HashMap and stores in a hash Table at a particular index on the hashCode Algorithm, if collison happens with another string at an index then it forms a singlelinked list and stores the values
 
 const int SIZE=10;
 int hashFunction(char *);
@@ -12,12 +12,13 @@ int hashFunction(char *);
 struct Node 
 {
   char *st;
+  int rollNo;
   struct Node *next;
 };
 struct Node *head=NULL;
 
-void hashInsert(char * ,int);
-void hashDelete(char * ,int);
+void hashInsert(char * ,int,int);
+void hashDelete(char * ,int, int);
 void hashDisplay(int ,char *,int);
 
 struct Node *hashT[10];
@@ -34,7 +35,7 @@ static void init()
 
 int main(void) {
 
-int choice;
+int choice,roll;
 init();
 char *str;
 
@@ -47,20 +48,24 @@ printf("\nenter corresponding values for Hash table operation \n 1.Insert \n 2.D
    {
     case 1: str = (char *)malloc ( 20 * sizeof (char ));
             printf(" \n Enter any String \n");
-            fgets(str,20,stdin);
+            scanf ("%s", str);
+            puts("Enter a RollNo");
+            scanf("%d",&roll);
             key = hashFunction(str);
-            hashInsert(str,key);
+            hashInsert(str,key,roll);
             
      break;
     case 2: str = (char *)malloc ( 20 * sizeof (char ));
             printf(" \n Enter any String \n");
-            fgets(str,20,stdin);
+            scanf ("%s", str);
+            puts("Enter a RollNo");
+            scanf("%d",&roll);
             key = hashFunction(str);
-            hashDelete(str,key);
+            hashDelete(str,key,roll);
     break;
     case 3 : printf(" \n Enter a string to search \n");
              str = (char *) malloc ( 20*sizeof(char ));     
-             fgets(str,20,stdin);
+             scanf("%s", str);
              key=hashFunction(str);
              flag=0;
              hashDisplay(key,str,flag);
@@ -69,7 +74,8 @@ printf("\nenter corresponding values for Hash table operation \n 1.Insert \n 2.D
     case 4 : flag=1;
              d : printf(" \n Enter a key to display hash Table values from 0 to 9 : \n");
              scanf("%d",&key);
-             ( (key >=0) && (key <=9) ) ?   hashDisplay(key, str,flag) : ({goto d;}) ;
+              ( (key >=0) && (key <=9) ) ?   hashDisplay(key, str,flag) : ({goto d;}) ;
+            
     break;         
     default: 
      {
@@ -96,12 +102,14 @@ int hashCode=0, i=0;
 }
 
 //Inserting strings into a key Index generated from hashCode
-void hashInsert(char *s,int key) {
+void hashInsert(char *s,int key,int roll) {
 
    struct Node *temp ;
+   int position =0;
    temp = (struct Node *) malloc(sizeof(struct Node ));
    struct Node *trav;
    temp->st = s;
+   temp->rollNo=roll;
    temp->next = NULL;
      
    if (head == NULL )
@@ -117,13 +125,21 @@ void hashInsert(char *s,int key) {
     while ( trav->next != NULL )
      {
       trav=trav->next;
-            
+      position+=1;
+      if ( trav->rollNo == temp->rollNo )
+      {
+        printf(" Duplicate value : already EXISTS at hash[key] %d\t %d\t RollNO :  %d\t Name : %s\n", key, position ,trav->rollNo,trav->st);
+        free(temp);
+        temp=NULL;
+        break;
+      }     
      }
-     trav->next = temp;
+     if ( temp != NULL )
+      trav->next = temp;
    }   
 }
 
-void hashDelete(char *str,int key)
+void hashDelete(char *str,int key,int roll)
 {
   printf("---Delete---- \n");
   struct Node *trav=NULL;
@@ -141,7 +157,7 @@ void hashDelete(char *str,int key)
        prev = trav;
        trav = trav->next;
        position+=1;
-       if ( strcmp(trav->st ,str) ==0 )
+       if ( (strcmp(trav->st ,str) ==0) && (trav->rollNo == roll) )
        {
          countList+=1;
          prev->next=trav->next;
@@ -175,7 +191,7 @@ void hashDisplay(int key, char *str,int flag)
      {
       trav=trav->next;  
       position+=1;
-      printf(" String found at keyIndex value ::%d\t hash[Key] :: %p\t Position :: %d\t %s\n",key ,hashT[key],position,trav->st);
+      printf(" String found at keyIndex value ::%d\t hash[Key] :: %p\t Position :: %d\t RollNo : %d\t %s\n",key ,hashT[key],position,trav->rollNo,trav->st);
      }
    }
    else
@@ -187,7 +203,7 @@ void hashDisplay(int key, char *str,int flag)
       if ( strcmp(trav->st ,str) ==0 )
        {
         countList+=1;
-        printf(" String found at keyIndex value ::%d\t hash[Key] :: %p\t Position :: %d\t %s\n",key ,hashT[key],position,trav->st);
+        printf(" String found at keyIndex value ::%d\t hash[Key] :: %p\t Position :: %d\t RollNo : %d\t %s\n",key ,hashT[key],position,trav->rollNo,trav->st);
        }
      }
     if ( countList == 0 )

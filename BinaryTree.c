@@ -62,10 +62,7 @@ void delete() {
    if ( value == -1 )
    printf(" item not found");
 }
-  
-  
-
-  
+ 
 void Insert() {   //inserting the values in a BST
    int x;
    struct Node *curr;

@@ -136,7 +136,8 @@ void Display() {
 	 case 1: printf("\nInorder Traversal\n");
 	 InOrder(rev);
 	 break;
-	 case 2: printf("\nPreOrder Traversal\n");
+	 case 2: 
+	 printf("\nPreOrder Traversal\n");
 	 PreOrder(rev);
 	 break;
 	 case 3 : printf("\nPostorder Traversal\n");
@@ -240,6 +241,7 @@ int max(int a,int b) {
 
   void Delete(struct Node *r,int x) {
      struct Node* temp;
+     
      if ( r == NULL ) 
       return ;
      
@@ -309,6 +311,7 @@ int max(int a,int b) {
       else         //  test case 4 : to delete a value which has both left and right sub trees
       {
        temp =r;
+       curr=NULL;
         printf("\n the element has both childs\n 1. replace  min value from right subtree or \n2. replace max value from left subtree : ");
         int choice;
         scanf("%d",&choice);
@@ -316,6 +319,7 @@ int max(int a,int b) {
         switch(choice)
         {
           case 1 : 
+          {
           result  = FindMin(r->right);    // to find minimum value in right sub tree with recursion
         printf("min value from right sub tree %d",result->data);
        
@@ -323,31 +327,42 @@ int max(int a,int b) {
         {
          if ( x == head->data )    // if root node to be deleted with left sub tree being single child
          {
-          temp->data = result->data;
-          temp->right = NULL;
+          if ( curr != NULL )
+          {
+           temp->data = result->data;
+           curr->left = NULL;
+          } 
+          else
+          {
+           temp->data = result->data;
+           temp->right = NULL;
+          }
          }
          else
          {
-          temp->data = result->data;
-          curr->left=NULL;
+          if ( curr!= NULL )
+          {
+           temp->data = result->data;
+           curr->left=NULL;
+          }
+          else
+          {
+            temp->data = result->data;
+            temp->right = NULL;
+          }
          }
         }
         else
         {
-         if ( temp->right == result )
-          {
-            temp->data = result->data;
-            temp->right=result->right;
-          }
-          else {
-          temp->data = result->data;
-          curr->left =result->right;
-         }
+         temp->data = result->data;
+         curr->left =result->right;
+         
         }
         free(result);
         break;
-        
+       }
         case 2 :
+        {
         result  = FindMax(r->left);    // to find the maximum value in left subtree with recursion
         printf("max value from left sub tree %d",result->data);
         
@@ -355,35 +370,45 @@ int max(int a,int b) {
         {
          if ( x == head->data )   // if root node to be deleted with right sub tree being single child
          {
-          temp->data = result->data;
-          temp->left = NULL;
+          if ( curr !=NULL )
+          {
+            temp->data = result->data;
+            curr->right = NULL;
+           }
+           else
+           {
+             temp->data = result->data;
+             temp->left = NULL;
+           } 
          }
          else
          {
-          temp->data = result->data;
-          curr->right=NULL;
+          if ( curr!= NULL )
+          {
+           temp->data = result->data;
+           curr->right=NULL;
+          }
+          else
+          {
+            temp->data = result->data;
+            temp->left = NULL;
+          }
          }
         }
         else
         {
-          if ( temp->left == result )
-          {
-            temp->data = result->data;
-            temp->left=result->left;
-          }
-          else {
          temp->data = result->data;
          curr->right =result->left;
-         }
+         
         }
         free(result);
         break;
-        
+       } 
         default : printf("\n enter correct choice");
         break;
-        }
-      
       }
+      
+    }
       value =0;   // to return global value to 0 when  data  found to delete else value remains -1
       counter-=1; // to decrement the static counter to count the total no of elements after deletion
     }

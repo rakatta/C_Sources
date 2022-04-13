@@ -35,9 +35,13 @@ int height=0;
    break;
    case 3: Display();
    break;
-   case 4 : BST(rev);
+   case 4 : 
+   rev=head;
+   BST(rev);
    break;
-   case 5 : height = Height(rev);
+   case 5 : 
+   rev=head;
+   height = Height(rev);
    printf("\n The height of the tree is: %d\n" , height);
    break;
    case 6 : printf("\nThe total elements in a Binary tree : %d\n", counter);
@@ -61,8 +65,10 @@ void delete() {
    Delete(rev,y);
    if ( value == -1 )
    printf(" item not found");
+   else
+   printf("Item Found");
 }
- 
+  
 void Insert() {   //inserting the values in a BST
    int x;
    struct Node *curr;
@@ -215,7 +221,11 @@ void BST(struct Node* temp) {
    if (  ( temp->data<findMin->data) && ( temp->data>findMax->data))
    printf("Binary tree is Binary search tree");
    
-   // to check if tree is complete BST
+   int bstHeight= Height(rev);
+   if ( (pow(2,bstHeight+1)-1 ) == counter )
+     printf("\n Tree is complete BST");
+     else
+     printf("\nNot a complete BST");
    
   }
 int max( int , int );
